@@ -2670,11 +2670,11 @@ VoxelShapeNameEntry:
    id: lu16
 
 GatheringJoinInfo:
-   experience_id: uuid
-   experience_name: string
+   experience_id?: uuid
+   experience_name?: string
    experience_world_id?: uuid
    experience_world_name?: string
-   creator_id: string
+   creator_id?: string
    target_id?: uuid
    scenario_id?: string
    server_id?: string
@@ -3394,6 +3394,14 @@ EnvironmentAttributeData:
    ease_type: li32
    local_transition_ticks: lu32
    noise_transition: bool
+   noise_alignment: NoiseAlignment
+
+NoiseAlignmentType: u8 =>
+   0: min_local_transition_end
+
+NoiseAlignment:
+   type: NoiseAlignmentType
+   value: varint
 
 AttributeLayerData:
    name: string
@@ -3407,6 +3415,8 @@ EntityDiagnosticTimingInfo:
    entity: string
    duration_nanos: lu64
    percent_of_total: u8
+   position: vec3f
+   dimension: string
 
 SystemDiagnosticTimingInfo:
    display_name: string
@@ -3468,6 +3478,7 @@ ShapeText:
    text: string
    use_rotation?: bool
    background_color?: li32
+   line_gap_height?: lf32
    depth_test?: bool
    show_backface?: bool
    show_backface_text?: bool

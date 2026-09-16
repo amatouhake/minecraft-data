@@ -5064,11 +5064,17 @@
       [
         {
           "name": "experience_id",
-          "type": "uuid"
+          "type": [
+            "option",
+            "uuid"
+          ]
         },
         {
           "name": "experience_name",
-          "type": "string"
+          "type": [
+            "option",
+            "string"
+          ]
         },
         {
           "name": "experience_world_id",
@@ -5086,7 +5092,10 @@
         },
         {
           "name": "creator_id",
-          "type": "string"
+          "type": [
+            "option",
+            "string"
+          ]
         },
         {
           "name": "target_id",
@@ -6826,6 +6835,32 @@
         {
           "name": "noise_transition",
           "type": "bool"
+        },
+        {
+          "name": "noise_alignment",
+          "type": "NoiseAlignment"
+        }
+      ]
+    ],
+    "NoiseAlignmentType": [
+      "mapper",
+      {
+        "type": "u8",
+        "mappings": {
+          "0": "min_local_transition_end"
+        }
+      }
+    ],
+    "NoiseAlignment": [
+      "container",
+      [
+        {
+          "name": "type",
+          "type": "NoiseAlignmentType"
+        },
+        {
+          "name": "value",
+          "type": "varint"
         }
       ]
     ],
@@ -6881,6 +6916,14 @@
         {
           "name": "percent_of_total",
           "type": "u8"
+        },
+        {
+          "name": "position",
+          "type": "vec3f"
+        },
+        {
+          "name": "dimension",
+          "type": "string"
         }
       ]
     ],
@@ -7107,6 +7150,13 @@
           "type": [
             "option",
             "li32"
+          ]
+        },
+        {
+          "name": "line_gap_height",
+          "type": [
+            "option",
+            "lf32"
           ]
         },
         {
@@ -15881,7 +15931,8 @@
                     "mappings": {
                       "0": "float",
                       "1": "bool",
-                      "2": "string"
+                      "2": "string",
+                      "3": "string_array"
                     }
                   }
                 ]
@@ -15895,7 +15946,14 @@
                     "fields": {
                       "float": "lf32",
                       "bool": "bool",
-                      "string": "string"
+                      "string": "string",
+                      "string_array": [
+                        "array",
+                        {
+                          "countType": "varint",
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 ]

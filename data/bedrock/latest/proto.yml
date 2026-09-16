@@ -4504,10 +4504,12 @@ packet_serverbound_pack_setting_change:
          - float
          - bool
          - string
+         - string_array
       value: type ?
          if float: lf32
          if bool: bool
          if string: string
+         if string_array: string[]varint
 
 packet_clientbound_data_store:
    !id: 0x14a

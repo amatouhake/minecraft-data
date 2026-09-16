@@ -2923,8 +2923,8 @@
       "language": "bedrock/1.21.70"
     },
     "1.26.50": {
-      "blocks": "bedrock/1.26.30",
-      "blockStates": "bedrock/1.26.30",
+      "blocks": "bedrock/1.26.50",
+      "blockStates": "bedrock/1.26.50",
       "blockCollisionShapes": "bedrock/1.26.30",
       "biomes": "bedrock/1.21.60",
       "entities": "bedrock/1.21.80",
