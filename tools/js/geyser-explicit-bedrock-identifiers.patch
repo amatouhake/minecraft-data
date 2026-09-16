@@ -1,0 +1,23 @@
+diff --git a/src/main/java/org/geysermc/mappings/definitions/block/BlockEntry.java b/src/main/java/org/geysermc/mappings/definitions/block/BlockEntry.java
+index af6ae1f..eaba9d5 100644
+--- a/src/main/java/org/geysermc/mappings/definitions/block/BlockEntry.java
++++ b/src/main/java/org/geysermc/mappings/definitions/block/BlockEntry.java
+@@ -2,7 +2,6 @@ package org.geysermc.mappings.definitions.block;
+ 
+ import com.mojang.serialization.Codec;
+ import com.mojang.serialization.codecs.RecordCodecBuilder;
+-import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.resources.Identifier;
+ import net.minecraft.world.level.block.Block;
+@@ -23,10 +22,6 @@ public record BlockEntry(Optional<String> bedrockIdentifier, CompoundTag state)
+     }
+ 
+     public static BlockEntry of(Block block, String name, CompoundTag state) {
+-        String javaName = BuiltInRegistries.BLOCK.getKey(block).getPath();
+-        if (javaName.equals(name)) {
+-            return new BlockEntry(Optional.empty(), state);
+-        }
+         return new BlockEntry(Optional.of(name), state);
+     }
+ 
