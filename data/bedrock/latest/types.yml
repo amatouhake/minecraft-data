@@ -1357,31 +1357,14 @@ MapDecoration:
    - village_snowy
    - village_taiga
    - jungle_temple
-   - witch_hut =>
-   - marker_white
-   - marker_green
-   - marker_red
-   - marker_blue
-   - cross_white
-   - triangle_red
-   - square_white
-   - marker_sign
-   - marker_pink
-   - marker_orange
-   - marker_yellow
-   - marker_teal
-   - triangle_green
-   - small_square_white
-   - mansion
-   - monument
-   - no_draw
-   - village_desert
-   - village_plains
-   - village_savanna
-   - village_snowy
-   - village_taiga
-   - jungle_temple
    - witch_hut
+   - trial_chambers
+   - abandoned_camp
+   - buried_ancient_city
+   - buried_mineshaft
+   - desert_pyramid
+   - warm_ocean_ruins
+   - count
    # Rotation is the rotation of the map decoration. It is byte due to the 16 fixed directions that the
    # map decoration may face.
    rotation: u8
@@ -2846,6 +2829,26 @@ DisconnectFailReason: zigzag32 =>
    - host_accepts_no_type_of_auth
    - not_authenticated_fast_fail
    - editor_not_allowed
+   - missing_structure_data
+   - unsupported_transport
+
+FurnaceLeftTabIndex: zigzag32 =>
+   - none
+   - recipe_food
+   - recipe_items
+   - recipe_blocks
+   - recipe_search
+   - inventory
+
+FurnaceLayout: zigzag32 =>
+   - none
+   - inventory_only
+   - default
+
+FurnaceOptions:
+   left_tab: FurnaceLeftTabIndex
+   filtering: bool
+   layout: FurnaceLayout
 
 FullContainerName:
    container_id: ContainerSlotType

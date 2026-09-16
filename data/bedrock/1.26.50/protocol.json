@@ -3154,31 +3154,14 @@
                 "20": "village_snowy",
                 "21": "village_taiga",
                 "22": "jungle_temple",
-                "23": "witch_hut =>",
-                "24": "marker_white",
-                "25": "marker_green",
-                "26": "marker_red",
-                "27": "marker_blue",
-                "28": "cross_white",
-                "29": "triangle_red",
-                "30": "square_white",
-                "31": "marker_sign",
-                "32": "marker_pink",
-                "33": "marker_orange",
-                "34": "marker_yellow",
-                "35": "marker_teal",
-                "36": "triangle_green",
-                "37": "small_square_white",
-                "38": "mansion",
-                "39": "monument",
-                "40": "no_draw",
-                "41": "village_desert",
-                "42": "village_plains",
-                "43": "village_savanna",
-                "44": "village_snowy",
-                "45": "village_taiga",
-                "46": "jungle_temple",
-                "47": "witch_hut"
+                "23": "witch_hut",
+                "24": "trial_chambers",
+                "25": "abandoned_camp",
+                "26": "buried_ancient_city",
+                "27": "buried_mineshaft",
+                "28": "desert_pyramid",
+                "29": "warm_ocean_ruins",
+                "30": "count"
               }
             }
           ]
@@ -5346,9 +5329,53 @@
           "144": "expired_token",
           "145": "host_accepts_no_type_of_auth",
           "146": "not_authenticated_fast_fail",
-          "147": "editor_not_allowed"
+          "147": "editor_not_allowed",
+          "148": "missing_structure_data",
+          "149": "unsupported_transport"
         }
       }
+    ],
+    "FurnaceLeftTabIndex": [
+      "mapper",
+      {
+        "type": "zigzag32",
+        "mappings": {
+          "0": "none",
+          "1": "recipe_food",
+          "2": "recipe_items",
+          "3": "recipe_blocks",
+          "4": "recipe_search",
+          "5": "inventory"
+        }
+      }
+    ],
+    "FurnaceLayout": [
+      "mapper",
+      {
+        "type": "zigzag32",
+        "mappings": {
+          "0": "none",
+          "1": "inventory_only",
+          "2": "default"
+        }
+      }
+    ],
+    "FurnaceOptions": [
+      "container",
+      [
+        {
+          "name": "left_tab",
+          "type": "FurnaceLeftTabIndex"
+        },
+        {
+          "name": "filtering",
+          "type": "bool"
+        },
+        {
+          "name": "layout",
+          "type": "FurnaceLayout"
+        }
+      ]
     ],
     "FullContainerName": [
       "container",
@@ -16682,16 +16709,17 @@
             {
               "type": "u8",
               "mappings": {
-                "0": "furnace",
-                "1": "blast_furnace",
-                "2": "smoker"
+                "0": "none",
+                "1": "furnace",
+                "2": "blast_furnace",
+                "3": "smoker"
               }
             }
           ]
         },
         {
           "name": "options",
-          "type": "varint"
+          "type": "FurnaceOptions"
         }
       ]
     ],

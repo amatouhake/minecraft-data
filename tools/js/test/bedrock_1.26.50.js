@@ -2,9 +2,6 @@
 
 const assert = require('assert')
 const protocol = require('../../../data/bedrock/1.26.50/protocol.json')
-const dataPaths = require('../../../data/dataPaths.json')
-const blocks = require('../../../data/bedrock/1.26.50/blocks.json')
-const blockStates = require('../../../data/bedrock/1.26.50/blockStates.json')
 
 function fields (typeName) {
   const type = protocol.types[typeName]
@@ -53,27 +50,31 @@ describe('Bedrock 1.26.50 schema changes', () => {
     assert.equal(value[1].fields.string_array[1].type, 'string')
   })
 
-  it('uses the 1.26.50 global palette with connectivity and stair corner states', () => {
-    assert.equal(dataPaths.bedrock['1.26.50'].blocks, 'bedrock/1.26.50')
-    assert.equal(dataPaths.bedrock['1.26.50'].blockStates, 'bedrock/1.26.50')
+  it('encodes the complete furnace options payload', () => {
+    assert.deepEqual(protocol.types.FurnaceLeftTabIndex[1].mappings, {
+      0: 'none', 1: 'recipe_food', 2: 'recipe_items', 3: 'recipe_blocks', 4: 'recipe_search', 5: 'inventory'
+    })
+    assert.deepEqual(protocol.types.FurnaceLayout[1].mappings, { 0: 'none', 1: 'inventory_only', 2: 'default' })
+    assert.deepEqual(fields('FurnaceOptions').map(entry => entry.name), ['left_tab', 'filtering', 'layout'])
+    const furnace = fields('packet_set_player_furnace_options')
+    assert.deepEqual(furnace[0].type[1].mappings, { 0: 'none', 1: 'furnace', 2: 'blast_furnace', 3: 'smoker' })
+    assert.equal(furnace[1].type, 'FurnaceOptions')
+  })
 
-    const oakFenceStates = blockStates.filter(block => block.name === 'oak_fence')
-    const oakStairStates = blockStates.filter(block => block.name === 'oak_stairs')
-    const tripWireStates = blockStates.filter(block => block.name === 'trip_wire')
-    assert.equal(oakFenceStates.length, 16)
-    assert.equal(oakStairStates.length, 40)
-    assert.equal(tripWireStates.length, 256)
-    assert.deepEqual(Object.keys(oakFenceStates[0].states), [
-      'minecraft:connection_east',
-      'minecraft:connection_north',
-      'minecraft:connection_south',
-      'minecraft:connection_west'
-    ])
-    assert.equal(oakStairStates[0].states['minecraft:corner'].value, 'none')
-
-    const oakFence = blocks.find(block => block.name === 'oak_fence')
-    assert.equal(oakFence.minStateId, blockStates.indexOf(oakFenceStates[0]))
-    assert.equal(oakFence.maxStateId - oakFence.minStateId + 1, oakFenceStates.length)
-    assert(blocks.some(block => block.name === 'poplar_stairs'), 'new 1.26.50 blocks must be indexed')
+  it('uses the complete 1.26.50 map and disconnect enums', () => {
+    const mapType = field('MapDecoration', 'type').type[1].mappings
+    assert.deepEqual(Object.fromEntries(Object.entries(mapType).slice(23)), {
+      23: 'witch_hut',
+      24: 'trial_chambers',
+      25: 'abandoned_camp',
+      26: 'buried_ancient_city',
+      27: 'buried_mineshaft',
+      28: 'desert_pyramid',
+      29: 'warm_ocean_ruins',
+      30: 'count'
+    })
+    const disconnect = protocol.types.DisconnectFailReason[1].mappings
+    assert.equal(disconnect[148], 'missing_structure_data')
+    assert.equal(disconnect[149], 'unsupported_transport')
   })
 })

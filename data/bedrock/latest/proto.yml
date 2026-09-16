@@ -4717,10 +4717,11 @@ packet_set_player_furnace_options:
    !id: 0x15f
    !bound: client
    furnace_type: u8 =>
-      0: furnace
-      1: blast_furnace
-      2: smoker
-   options: varint
+      0: none
+      1: furnace
+      2: blast_furnace
+      3: smoker
+   options: FurnaceOptions
 
 packet_record_started:
    !id: 0x160
